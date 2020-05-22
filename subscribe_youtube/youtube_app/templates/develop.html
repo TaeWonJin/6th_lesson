@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YoutubeRecommend</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/develop.css'%}">
+</head>
+<body>
+    <div class="container">
+        <p class="main_title">유튜브 동영상 추천!</p>
+        {% for content in Youtube %}
+        <div class="main_box">
+            <div class="top_box">
+                <div class="left_box">
+                    <p class="title">{{content.name}}</p>
+                </div>
+                <div class="middle_box">
+                    <p class="creator_name">크리에이터 이름: <br>{{content.creator}}</p>
+                    <p class="subscribe_num">구독자 수: <br>{{content.subscribe_num}}</p>
+                    <p class="my_recommend">추천 별점: <br>
+                        {% if content.recommend == 1%}
+                        ★☆☆☆☆
+                        {% elif content.recommend == 2%}
+                        ★★☆☆☆
+                        {% elif content.recommend == 3%}
+                        ★★★☆☆
+                        {% elif content.recommend == 4%}
+                        ★★★★☆
+                        {% else %}
+                        ★★★★★
+                        {% endif %}
+                        </p>
+                </div>
+                <div class="on_off_box">
+                    {%if content.on_off == True %}
+                    <p class="on">Live now!</p>
+                    {% else %}
+                    <p class="off">Live now!</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="bottom_box">
+                <div class="link_box">
+                    <iframe  src="{{content.youtube_link_1}}" allowfullscreen></iframe>
+                </div>
+                <div class="link_box">
+                    <iframe  src="{{content.youtube_link_2}}" allowfullscreen></iframe>
+                </div>
+                <div class="link_box">
+                    <iframe  src="{{content.youtube_link_3}}" allowfullscreen></iframe>
+                </div>
+            </div>
+            <a href="{% url 'detail' content.id %}" align="center">자세히 보기</a>
+            <div  class="button_box" align="right">
+                <button class="button" name="Change" >수정</button>
+                <button class="button" name="Delete" >삭제</button>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="create_new" align="center">
+            <a href ="{% url 'new' %}">
+            <button class="button" name="Create" >새로운 유튜브 추가하기</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

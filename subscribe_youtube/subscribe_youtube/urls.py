@@ -25,9 +25,7 @@ urlpatterns = [
     path('develop/',youtube_app.views.develop,name='develop'),
     path('detail/<int:detail_id>',youtube_app.views.detail,name='detail'),
     path('new/',youtube_app.views.new,name='new'),
-    path('ne/',youtube_app.views.ne,name='ne'),
     path('create/',youtube_app.views.create,name='create'),
-    path('cre/',youtube_app.views.cre,name='cre'),
 ]
 
 if settings.DEBUG:
